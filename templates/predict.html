@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Breast Cancer Prediction</title>
+</head>
+<body class="bg-secondary-pink">
+    <header class="bg-primary-pink text-white text-center py-6">
+        <h1 class="text-4xl font-bold">Breast Cancer Prediction</h1>
+    </header>
+    <main class="max-w-4xl mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+        <form action="{{ url_for('predict') }}" method="POST">
+            <h2 class="text-3xl font-semibold mb-4 text-primary-pink">Input Features</h2>
+            <!-- Input fields for the features -->
+            <div class="mb-4">
+                <label for="radius_mean" class="block text-lg font-semibold text-gray-700">Radius Mean</label>
+                <input type="text" name="radius_mean" id="radius_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="texture_mean" class="block text-lg font-semibold text-gray-700">Texture Mean</label>
+                <input type="text" name="texture_mean" id="texture_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="perimeter_mean" class="block text-lg font-semibold text-gray-700">Perimeter Mean</label>
+                <input type="text" name="perimeter_mean" id="perimeter_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="area_mean" class="block text-lg font-semibold text-gray-700">Area Mean</label>
+                <input type="text" name="area_mean" id="area_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="smoothness_mean" class="block text-lg font-semibold text-gray-700">Smoothness Mean</label>
+                <input type="text" name="smoothness_mean" id="smoothness_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="compactness_mean" class="block text-lg font-semibold text-gray-700">Compactness Mean</label>
+                <input type="text" name="compactness_mean" id="compactness_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="concavity_mean" class="block text-lg font-semibold text-gray-700">Concavity Mean</label>
+                <input type="text" name="concavity_mean" id="concavity_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="concave_points_mean" class="block text-lg font-semibold text-gray-700">Concave Points Mean</label>
+                <input type="text" name="concave_points_mean" id="concave_points_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="symmetry_mean" class="block text-lg font-semibold text-gray-700">Symmetry Mean</label>
+                <input type="text" name="symmetry_mean" id="symmetry_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="fractal_dimension_mean" class="block text-lg font-semibold text-gray-700">Fractal Dimension Mean</label>
+                <input type="text" name="fractal_dimension_mean" id="fractal_dimension_mean" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="radius_se" class="block text-lg font-semibold text-gray-700">Radius SE</label>
+                <input type="text" name="radius_se" id="radius_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="texture_se" class="block text-lg font-semibold text-gray-700">Texture SE</label>
+                <input type="text" name="texture_se" id="texture_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="perimeter_se" class="block text-lg font-semibold text-gray-700">Perimeter SE</label>
+                <input type="text" name="perimeter_se" id="perimeter_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="area_se" class="block text-lg font-semibold text-gray-700">Area SE</label>
+                <input type="text" name="area_se" id="area_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="smoothness_se" class="block text-lg font-semibold text-gray-700">Smoothness SE</label>
+                <input type="text" name="smoothness_se" id="smoothness_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="compactness_se" class="block text-lg font-semibold text-gray-700">Compactness SE</label>
+                <input type="text" name="compactness_se" id="compactness_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="concavity_se" class="block text-lg font-semibold text-gray-700">Concavity SE</label>
+                <input type="text" name="concavity_se" id="concavity_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="concave_points_se" class="block text-lg font-semibold text-gray-700">Concave Points SE</label>
+                <input type="text" name="concave_points_se" id="concave_points_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="symmetry_se" class="block text-lg font-semibold text-gray-700">Symmetry SE</label>
+                <input type="text" name="symmetry_se" id="symmetry_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="fractal_dimension_se" class="block text-lg font-semibold text-gray-700">Fractal Dimension SE</label>
+                <input type="text" name="fractal_dimension_se" id="fractal_dimension_se" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="radius_worst" class="block text-lg font-semibold text-gray-700">Radius Worst</label>
+                <input type="text" name="radius_worst" id="radius_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="texture_worst" class="block text-lg font-semibold text-gray-700">Texture Worst</label>
+                <input type="text" name="texture_worst" id="texture_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="perimeter_worst" class="block text-lg font-semibold text-gray-700">Perimeter Worst</label>
+                <input type="text" name="perimeter_worst" id="perimeter_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="area_worst" class="block text-lg font-semibold text-gray-700">Area Worst</label>
+                <input type="text" name="area_worst" id="area_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="smoothness_worst" class="block text-lg font-semibold text-gray-700">Smoothness Worst</label>
+                <input type="text" name="smoothness_worst" id="smoothness_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="compactness_worst" class="block text-lg font-semibold text-gray-700">Compactness Worst</label>
+                <input type="text" name="compactness_worst" id="compactness_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="concavity_worst" class="block text-lg font-semibold text-gray-700">Concavity Worst</label>
+                <input type="text" name="concavity_worst" id="concavity_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="concave_points_worst" class="block text-lg font-semibold text-gray-700">Concave Points Worst</label>
+                <input type="text" name="concave_points_worst" id="concave_points_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="symmetry_worst" class="block text-lg font-semibold text-gray-700">Symmetry Worst</label>
+                <input type="text" name="symmetry_worst" id="symmetry_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="mb-4">
+                <label for="fractal_dimension_worst" class="block text-lg font-semibold text-gray-700">Fractal Dimension Worst</label>
+                <input type="text" name="fractal_dimension_worst" id="fractal_dimension_worst" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            <div class="text-center mt-6">
+                <button type="submit" class="btn btn-primary hover:btn-primary-hover">Predict</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
